@@ -3,6 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DynamicForms.App">
     <Application.Resources>
-
+        <Style TargetType="Frame" >
+            <Setter Property="BackgroundColor" Value="#fdfdfd"/>
+            <Setter Property="BorderColor" Value="#e5e5e5"/>
+            <Setter Property="Margin" Value="18"/>
+            <Setter Property="CornerRadius" Value="15"/>
+            <Setter Property="Opacity" Value="0.7"/>
+        </Style>
     </Application.Resources>
 </Application>

@@ -1,6 +1,9 @@
 ﻿
 namespace DynamicForms
 {
+    using System;
+    using DynamicForms.Customs;
+    using DynamicForms.Fields;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
@@ -11,45 +14,70 @@ namespace DynamicForms
 		{
 			InitializeComponent ();
             createPage();
+            CreatePageTwo();
         }
-
+        
         private void createPage()
         {
             var PageDynamic = new ContentPage();
-            var label = new Label();
-            label.Text = "Fuck yeah!!!!!!!";
+            //var label = new Label();
+            //label.Text = "Fuck yeah!!!!!!!";
 
-            var ContentStack = new StackLayout
-            {
-                Orientation = StackOrientation.Horizontal,
-                Children =
-                {
-                    label
-                }
-            };
+            //var ContentStack = new StackLayout
+            //{
+            //    Orientation = StackOrientation.Horizontal,
+            //    Children =
+            //    {
+            //        label
+            //    }
+            //};
 
-            PageDynamic.Title = "Fuck";
-            PageDynamic.Content = ContentStack;
+            //PageDynamic.Title = "Fuck";
+            
+
+            var entryT = new EntryCustoms();
+            entryT.Title = "Primer campo";
+            PageDynamic.Content = entryT;
             this.Children.Add(PageDynamic);
 
-            var PageDynamic2 = new ContentPage();
+            
+        }
+
+        private void CreatePageTwo()
+        {
+            var PageDynamic = new ContentPage();
             var label2 = new Label();
             label2.Text = "Fuck yeah!!!!!!! 2";
-
-            var ContentStack2 = new StackLayout
+            var entryCustom = new EntryCustom();
+            var ContentStack2 = new FlexLayout
             {
-                Orientation = StackOrientation.Horizontal,
+                Direction = FlexDirection.Column,
                 Children =
                 {
-                    label2
+                    label2,
+                    entryCustom
                 }
             };
-
-            PageDynamic2.Title = "Fuck2";
-            PageDynamic2.Content = ContentStack2;
+            var FrameCustom = new FrameCustom {
+                Content = ContentStack2
+            };
+            
+            var ContentFlexLayout = new FlexLayoutCustom
+            {
+                Children =
+                {
+                    FrameCustom
+                }
+            };
+           
 
             
-            this.Children.Add(PageDynamic2);
+
+            PageDynamic.Title = "Fuck2";
+            PageDynamic.Content = ContentFlexLayout;
+
+
+            this.Children.Add(PageDynamic);
         }
     }
 }

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<FlexLayout 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="DynamicForms.Customs.EntryCustoms"
+    Margin="5,10,5,0">
+    <Frame 
+         WidthRequest="300"
+         HeightRequest="100">
+        <FlexLayout Direction="Column">
+            <Label
+                x:Name="title"
+                FontAttributes="Bold"
+                Text="Usuario"
+                VerticalOptions="Center"/>
+            <Entry
+                x:Name="entry"
+                Text="{Binding User, Mode=TwoWay}"
+                Placeholder="Usuario"/>
+        </FlexLayout>
+    </Frame>
+</FlexLayout>
