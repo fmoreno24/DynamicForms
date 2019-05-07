@@ -2,6 +2,7 @@
 namespace DynamicForms
 {
     using System;
+    using System.Collections.Generic;
     using DynamicForms.Customs;
     using DynamicForms.Fields;
     using Xamarin.Forms;
@@ -10,73 +11,59 @@ namespace DynamicForms
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class TabDynamicPage : TabbedPage
 	{
-		public TabDynamicPage ()
+        private List<object> listDynamic;
+        public TabDynamicPage ()
 		{
 			InitializeComponent ();
+            listDynamic = new List<object>();
             createPage();
             CreatePageTwo();
         }
         
+
         private void createPage()
         {
             var PageDynamic = new ContentPage();
-            //var label = new Label();
-            //label.Text = "Fuck yeah!!!!!!!";
-
-            //var ContentStack = new StackLayout
-            //{
-            //    Orientation = StackOrientation.Horizontal,
-            //    Children =
-            //    {
-            //        label
-            //    }
-            //};
-
-            //PageDynamic.Title = "Fuck";
             
-
-            var entryT = new EntryCustoms();
+            Button CurrentButton = new Button()
+            {
+                Text = "Button"
+            };
+            EntryCustoms entryT = new EntryCustoms("123456");
+            CurrentButton.Clicked += OnButtonClicked;
+            StackLayout stack = new StackLayout();
+            //button.Clicked += OnButtonClicked;
+            
             entryT.Title = "Primer campo";
-            PageDynamic.Content = entryT;
+            PageDynamic.Title = "Pagina 1";
+            stack.Children.Add(entryT);
+            stack.Children.Add(CurrentButton);
+            PageDynamic.Content = stack;
+            listDynamic.Add(entryT);
             this.Children.Add(PageDynamic);
+        }
 
+        private void OnButtonClicked(object sender, EventArgs e)
+        {
+            Button ClickedButton = (Button)sender;
+            if(listDynamic != null && listDynamic.Count > 0)
+            {
+                for(int i = 0; i < listDynamic.Count; i++)
+                {
+                    ClickedButton.Text = "You clicked the button with id " + ClickedButton.StyleId;
+                }
+            }
             
         }
 
         private void CreatePageTwo()
         {
             var PageDynamic = new ContentPage();
-            var label2 = new Label();
-            label2.Text = "Fuck yeah!!!!!!! 2";
-            var entryCustom = new EntryCustom();
-            var ContentStack2 = new FlexLayout
-            {
-                Direction = FlexDirection.Column,
-                Children =
-                {
-                    label2,
-                    entryCustom
-                }
-            };
-            var FrameCustom = new FrameCustom {
-                Content = ContentStack2
-            };
-            
-            var ContentFlexLayout = new FlexLayoutCustom
-            {
-                Children =
-                {
-                    FrameCustom
-                }
-            };
-           
-
-            
-
-            PageDynamic.Title = "Fuck2";
-            PageDynamic.Content = ContentFlexLayout;
-
-
+            var entryT = new EntryCustoms("654321");
+            entryT.Title = "Otro campo";
+            PageDynamic.Title = "Pagina 2";
+            PageDynamic.Content = entryT;
+            listDynamic.Add(entryT);
             this.Children.Add(PageDynamic);
         }
     }

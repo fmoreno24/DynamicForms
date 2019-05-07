@@ -1,6 +1,8 @@
-﻿using System;
+﻿using DynamicForms.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,12 +14,39 @@ namespace DynamicForms.Customs
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class EntryCustoms : FlexLayout
     {
-		public EntryCustoms ()
+        private string id;
+        public string ID
+        {
+            get { return this.id; }
+            set { SetValue(ref this.id, value); }
+        }
+
+        protected void SetValue<T>(ref T backingField, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(backingField, value))
+            {
+                return;
+            }
+
+            backingField = value;
+            OnPropertyChanged(propertyName);
+        }
+
+        public EntryCustoms ()
 		{
 			InitializeComponent ();
             title.Text = Title;
             entry.Text = Text;
             entry.TextChanged += OnTextChanged;
+        }
+
+        public EntryCustoms(string id)
+        {
+            InitializeComponent();
+            title.Text = Title;
+            entry.Text = Text;
+            entry.TextChanged += OnTextChanged;
+            this.id = id;
         }
 
         private void OnTextChanged(object sender, TextChangedEventArgs e)
