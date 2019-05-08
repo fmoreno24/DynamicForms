@@ -30,6 +30,11 @@ namespace DynamicForms
                 Text = "Button"
             };
             EntryCustoms entryT = new EntryCustoms("123456");
+            PickerCustoms picker = new PickerCustoms("454545");
+
+            picker.createPicker("Goku es el guerrero mas fuerte de todos los universos y mató.");
+            picker.createPicker("Vegeta");
+            picker.createPicker("Gohan");
             CurrentButton.Clicked += OnButtonClicked;
             StackLayout stack = new StackLayout();
             //button.Clicked += OnButtonClicked;
@@ -37,6 +42,7 @@ namespace DynamicForms
             entryT.Title = "Primer campo";
             PageDynamic.Title = "Pagina 1";
             stack.Children.Add(entryT);
+            stack.Children.Add(picker);
             stack.Children.Add(CurrentButton);
             PageDynamic.Content = stack;
             listDynamic.Add(entryT);
